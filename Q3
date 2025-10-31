@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Booking Webpage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: Arial;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    @media (max-width:600px){
+      .container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center text-primary mb-4">Travel Booking Webpage</h2>
+
+  <form id="searchForm" class="mb-4">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label>Destination</label>
+        <input type="text" id="dest" class="form-control" placeholder="Enter destination" list="places" autocomplete="on" required>
+        <datalist id="places">
+          <option value="Paris">
+          <option value="London">
+          <option value="Tokyo">
+          <option value="New York">
+          <option value="Dubai">
+        </datalist>
+      </div>
+      <div class="col-md-3">
+        <label>Travel Date</label>
+        <input type="date" id="date" class="form-control" required>
+      </div>
+      <div class="col-md-3">
+        <label>Budget Range</label>
+        <input type="range" id="budget" min="100" max="1000" value="500" class="form-range">
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-success w-100">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="destinations" class="row g-3">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-2">
+        <h5>Paris <span class="badge bg-info">Popular</span></h5>
+        <p>City of Lights and Love.</p>
+        <button class="btn btn-primary btn-sm bookBtn">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-2">
+        <h5>Tokyo <span class="badge bg-warning text-dark">Trending</span></h5>
+        <p>Modern city with rich culture.</p>
+        <button class="btn btn-primary btn-sm bookBtn">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-2">
+        <h5>Dubai <span class="badge bg-success">Luxury</span></h5>
+        <p>Land of skyscrapers and shopping.</p>
+        <button class="btn btn-primary btn-sm bookBtn">Book Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Booking Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="modalInfo"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  $("#searchForm").submit(function(e){
+    e.preventDefault();
+    let dest = $("#dest").val();
+    let date = $("#date").val();
+    if(dest=="" || date==""){
+      alert("Please fill all fields!");
+      return;
+    }
+    $('html, body').animate({
+      scrollTop: $("#destinations").offset().top
+    }, 500);
+  });
+
+  $(".bookBtn").click(function(){
+    let place = $(this).closest(".card").find("h5").text();
+    $("#modalInfo").html("You are booking a trip to <b>" + place + "</b>.");
+    $("#bookModal").modal("show");
+  });
+});
+</script>
+
+</body>
+</html>
+
+Explanation:
+
+HTML5: Used form inputs with `autocomplete`, `date`, and `range` types for selecting destinations, travel dates, and budget.
+CSS3: Added positioning, box shadow, and hover effects to highlight destination cards.
+JavaScript & DOM: Dynamically validates form and updates booking modal details.
+jQuery: Used for smooth scrolling and modal interactions (`animate()`, `click()`).
+Bootstrap: Used responsive grid system, buttons, badges, and modal for booking confirmation.
+Responsive Design: Media query ensures layout adjusts for mobile and desktop screens for good usability.
