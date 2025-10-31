@@ -1,0 +1,714 @@
+Q1 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Event Registration Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial;
+    }
+    .container {
+      background: white;
+      margin-top: 40px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 0px 10px gray;
+    }
+    input, select, textarea {
+      border-radius: 8px;
+    }
+    @media (max-width:600px){
+      .container{
+        width:95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center text-primary">Event Registration Form</h2>
+  <form id="regForm">
+    <div class="mb-3">
+      <label>Full Name</label>
+      <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Department</label>
+      <input list="deptList" id="dept" class="form-control" placeholder="Choose department">
+      <datalist id="deptList">
+        <option value="CSE">
+        <option value="ECE">
+        <option value="EEE">
+        <option value="MECH">
+        <option value="CIVIL">
+      </datalist>
+    </div>
+
+    <div class="mb-3">
+      <label>Select Event</label>
+      <select id="event" class="form-control">
+        <option>Paper Presentation</option>
+        <option>Debugging</option>
+        <option>Quiz</option>
+        <option>Web Designing</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Comments</label>
+      <textarea id="comments" class="form-control" rows="3" placeholder="Any special note..."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Submit</button>
+  </form>
+
+  <div id="preview" class="mt-4 p-3 bg-light rounded" style="display:none;">
+    <h5>Entered Details:</h5>
+    <p id="output"></p>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("input, textarea").focus(function(){
+    $(this).css("background-color","#e0f7fa");
+  }).blur(function(){
+    $(this).css("background-color","white");
+  });
+
+  $("#regForm").submit(function(e){
+    e.preventDefault();
+    let name=$("#name").val();
+    let email=$("#email").val();
+    let dept=$("#dept").val();
+    let event=$("#event").val();
+    let comments=$("#comments").val();
+
+    if(name=="" || email==""){
+      alert("Please fill all required fields");
+      return;
+    }
+
+    $("#output").html(
+      "<b>Name:</b> "+name+"<br>"+
+      "<b>Email:</b> "+email+"<br>"+
+      "<b>Department:</b> "+dept+"<br>"+
+      "<b>Event:</b> "+event+"<br>"+
+      "<b>Comments:</b> "+comments
+    );
+    $("#preview").show();
+  });
+});
+</script>
+
+</body>
+</html>
+
+Explanation:
+
+Used HTML5 forms with `input`, `datalist`, `select`, and `textarea`.
+CSS3 gives rounded corners and responsive layout.
+Bootstrap makes the page look neat and mobile-friendly.
+jQuery is used for form validation and to show data preview before submitting.
+
+
+Q2
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: Arial;
+    }
+    .container {
+      margin-top: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0px 0px 8px gray;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 0 5px lightgray;
+    }
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: white;
+    }
+    .dark-mode .card {
+      background-color: #333;
+      color: white;
+    }
+    @media (max-width:600px){
+      .container{
+        width:95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h3 class="text-center text-primary mb-3">Employee Performance Dashboard</h3>
+
+  <div class="d-flex justify-content-between mb-3">
+    <select id="dept" class="form-select w-25">
+      <option value="All">All Departments</option>
+      <option value="Sales">Sales</option>
+      <option value="Engineering">Engineering</option>
+      <option value="HR">HR</option>
+    </select>
+    <button id="themeBtn" class="btn btn-dark">Switch Theme</button>
+  </div>
+
+  <div id="dashboard" class="row g-3">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Asha - Engineering</h5>
+        <p>Performance: 85%</p>
+        <div class="progress">
+          <div class="progress-bar" style="width:85%">85%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Ravi - Sales</h5>
+        <p>Performance: 75%</p>
+        <div class="progress">
+          <div class="progress-bar bg-success" style="width:75%">75%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Meena - HR</h5>
+        <p>Performance: 90%</p>
+        <div class="progress">
+          <div class="progress-bar bg-info" style="width:90%">90%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#themeBtn").click(function(){
+    $("body").toggleClass("dark-mode");
+  });
+
+  $("#dept").change(function(){
+    let dept = $(this).val();
+    $(".card").parent().show();
+    if(dept !== "All"){
+      $(".card").each(function(){
+        if(!$(this).text().includes(dept)){
+          $(this).parent().hide();
+        }
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
+Explanation:
+
+HTML5: Used `<div>`, `<select>`, and `<button>` to structure the dashboard layout properly.
+CSS3: Used box model, rounded corners, and a media query for mobile view.
+Bootstrap: Used grid system (`row`, `col-md-4`) and progress bars for showing performance visually.
+JavaScript & jQuery:
+
+   Theme switching (light/dark) done by toggling a CSS class.
+   Filter option dynamically hides or shows cards based on department.
+   Smooth UI interaction with jQuery `.toggleClass()` and `.change()`.
+   
+Q3
+**Program: Travel Booking Webpage**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Booking Webpage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: Arial;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    @media (max-width:600px){
+      .container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center text-primary mb-4">Travel Booking Webpage</h2>
+
+  <form id="searchForm" class="mb-4">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label>Destination</label>
+        <input type="text" id="dest" class="form-control" placeholder="Enter destination" list="places" autocomplete="on" required>
+        <datalist id="places">
+          <option value="Paris">
+          <option value="London">
+          <option value="Tokyo">
+          <option value="New York">
+          <option value="Dubai">
+        </datalist>
+      </div>
+      <div class="col-md-3">
+        <label>Travel Date</label>
+        <input type="date" id="date" class="form-control" required>
+      </div>
+      <div class="col-md-3">
+        <label>Budget Range</label>
+        <input type="range" id="budget" min="100" max="1000" value="500" class="form-range">
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-success w-100">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="destinations" class="row g-3">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-2">
+        <h5>Paris <span class="badge bg-info">Popular</span></h5>
+        <p>City of Lights and Love.</p>
+        <button class="btn btn-primary btn-sm bookBtn">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-2">
+        <h5>Tokyo <span class="badge bg-warning text-dark">Trending</span></h5>
+        <p>Modern city with rich culture.</p>
+        <button class="btn btn-primary btn-sm bookBtn">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-2">
+        <h5>Dubai <span class="badge bg-success">Luxury</span></h5>
+        <p>Land of skyscrapers and shopping.</p>
+        <button class="btn btn-primary btn-sm bookBtn">Book Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Booking Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="modalInfo"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  $("#searchForm").submit(function(e){
+    e.preventDefault();
+    let dest = $("#dest").val();
+    let date = $("#date").val();
+    if(dest=="" || date==""){
+      alert("Please fill all fields!");
+      return;
+    }
+    $('html, body').animate({
+      scrollTop: $("#destinations").offset().top
+    }, 500);
+  });
+
+  $(".bookBtn").click(function(){
+    let place = $(this).closest(".card").find("h5").text();
+    $("#modalInfo").html("You are booking a trip to <b>" + place + "</b>.");
+    $("#bookModal").modal("show");
+  });
+});
+</script>
+
+</body>
+</html>
+
+Explanation:
+
+HTML5: Used form inputs with `autocomplete`, `date`, and `range` types for selecting destinations, travel dates, and budget.
+CSS3: Added positioning, box shadow, and hover effects to highlight destination cards.
+JavaScript & DOM: Dynamically validates form and updates booking modal details.
+jQuery: Used for smooth scrolling and modal interactions (`animate()`, `click()`).
+Bootstrap: Used responsive grid system, buttons, badges, and modal for booking confirmation.
+Responsive Design: Media query ensures layout adjusts for mobile and desktop screens for good usability.
+
+
+Q4
+<!DOCTYPE html>
+<html>
+<head>
+<title>E-Learning Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+header {
+  background-color: #343a40;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+.course-card {
+  background: white;
+  box-shadow: 0 2px 5px gray;
+  border-radius: 10px;
+  padding: 15px;
+  transition: transform 0.3s;
+}
+.course-card:hover {
+  transform: scale(1.05);
+}
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h2>E-Learning Portal</h2>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">LearnNow</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+      </ul>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+    </div>
+  </div>
+</nav>
+
+<section class="container my-4">
+  <h3>Featured Courses</h3>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="course-card">
+        <h5>Web Development</h5>
+        <p>Learn HTML, CSS, JS and build your first website.</p>
+        <button class="btn btn-primary">Enroll</button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="course-card">
+        <h5>Python Programming</h5>
+        <p>Master Python from basics to advanced level.</p>
+        <button class="btn btn-primary">Enroll</button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="course-card">
+        <h5>Data Science</h5>
+        <p>Analyze and visualize data effectively.</p>
+        <button class="btn btn-primary">Enroll</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Login</h5>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <input type="email" class="form-control mb-2" id="email" placeholder="Enter Email">
+          <input type="password" class="form-control mb-2" id="password" placeholder="Enter Password">
+          <button type="submit" class="btn btn-success w-100">Login</button>
+          <p id="errorMsg" class="text-danger mt-2"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 E-Learning Portal. All Rights Reserved.</p>
+</footer>
+
+<script>
+$(document).ready(function(){
+  $(".course-card").hide().slideDown(1000);
+  $("#loginForm").on("submit", function(e){
+    e.preventDefault();
+    let email = $("#email").val();
+    let pass = $("#password").val();
+    if(email == "" || pass == ""){
+      $("#errorMsg").text("Please fill all fields!");
+    } else {
+      $("#errorMsg").text("");
+      alert("Login Successful!");
+      $("#loginModal").modal("hide");
+    }
+  });
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+Explanation:
+
+HTML5 semantic elements like `<header>`, `<section>`, and `<footer>` are used to structure the page.
+CSS3 box model and transition effects make course cards interactive when hovered.
+JavaScript validates the login form when submitted.
+jQuery adds animations for course cards and handles login validation.
+Bootstrap provides a responsive layout, navigation bar, and modal for login that adapts to all screen sizes.
+
+
+Q5
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  scroll-behavior: smooth;
+}
+header {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+section {
+  padding: 30px;
+}
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px gray;
+}
+h2 {
+  text-shadow: 1px 1px 2px gray;
+}
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+#clock {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to My Portfolio</h1>
+  <p id="greet"></p>
+  <p id="clock"></p>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Portfolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="about" class="container">
+  <h2>About Me</h2>
+  <p>Hello! I'm a passionate web developer skilled in HTML, CSS, JavaScript, and modern frameworks. I love creating interactive and responsive websites.</p>
+</section>
+
+<section id="projects" class="container">
+  <h2>My Projects</h2>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h5>Portfolio Website</h5>
+        <p>A responsive personal portfolio made with Bootstrap and jQuery.</p>
+        <button class="btn btn-primary view-btn" data-bs-toggle="modal" data-bs-target="#projectModal">View Details</button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h5>College ERP</h5>
+        <p>Node.js + MongoDB ERP System for managing student records.</p>
+        <button class="btn btn-primary view-btn" data-bs-toggle="modal" data-bs-target="#projectModal">View Details</button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h5>Travel Booking Site</h5>
+        <p>Dynamic web app for searching and booking destinations.</p>
+        <button class="btn btn-primary view-btn" data-bs-toggle="modal" data-bs-target="#projectModal">View Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal for Project Details -->
+<div class="modal fade" id="projectModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Project Details</h5>
+      </div>
+      <div class="modal-body" id="projectDetails">
+        <p>Loading project details...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="contact" class="container">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" class="form-control mb-2" placeholder="Your Name">
+    <input type="email" class="form-control mb-2" placeholder="Your Email">
+    <textarea class="form-control mb-2" placeholder="Message"></textarea>
+    <button class="btn btn-success w-100">Send</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 My Portfolio | Designed by Web Developer</p>
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Live clock
+  function updateClock(){
+    let now = new Date();
+    $("#clock").text(now.toLocaleTimeString());
+  }
+  setInterval(updateClock, 1000);
+
+  // Greeting message
+  let hour = new Date().getHours();
+  let greetText = (hour < 12) ? "Good Morning!" : (hour < 18) ? "Good Afternoon!" : "Good Evening!";
+  $("#greet").text(greetText);
+
+  // Load project details dynamically
+  $(".view-btn").click(function(){
+    let projectName = $(this).closest(".card").find("h5").text();
+    $("#projectDetails").html("<b>" + projectName + "</b><br>This project demonstrates web design, responsiveness, and JavaScript interactivity.");
+  });
+
+  // Smooth scroll animation
+  $("a.nav-link").click(function(e){
+    e.preventDefault();
+    let target = $(this).attr("href");
+    $("html, body").animate({scrollTop: $(target).offset().top}, 800);
+  });
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+Explanation:
+
+HTML5 semantic tags like `<header>`, `<section>`, and `<footer>` structure content clearly and enable smooth internal linking.
+CSS3 adds rounded corners, text shadows, and box shadows for better visual appeal.
+JavaScript handles the live clock and greeting messages dynamically based on the current time.
+jQuery enables smooth scrolling, project detail loading, and animation effects for interactivity.
+Bootstrap provides a responsive layout with ready-made components like navigation bar, cards, buttons, and modals for a consistent design across all devices.
+
+   
+
+
+
+
