@@ -1,0 +1,123 @@
+Q1 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Event Registration Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial;
+    }
+    .container {
+      background: white;
+      margin-top: 40px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 0px 10px gray;
+    }
+    input, select, textarea {
+      border-radius: 8px;
+    }
+    @media (max-width:600px){
+      .container{
+        width:95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center text-primary">Event Registration Form</h2>
+  <form id="regForm">
+    <div class="mb-3">
+      <label>Full Name</label>
+      <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Department</label>
+      <input list="deptList" id="dept" class="form-control" placeholder="Choose department">
+      <datalist id="deptList">
+        <option value="CSE">
+        <option value="ECE">
+        <option value="EEE">
+        <option value="MECH">
+        <option value="CIVIL">
+      </datalist>
+    </div>
+
+    <div class="mb-3">
+      <label>Select Event</label>
+      <select id="event" class="form-control">
+        <option>Paper Presentation</option>
+        <option>Debugging</option>
+        <option>Quiz</option>
+        <option>Web Designing</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Comments</label>
+      <textarea id="comments" class="form-control" rows="3" placeholder="Any special note..."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Submit</button>
+  </form>
+
+  <div id="preview" class="mt-4 p-3 bg-light rounded" style="display:none;">
+    <h5>Entered Details:</h5>
+    <p id="output"></p>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("input, textarea").focus(function(){
+    $(this).css("background-color","#e0f7fa");
+  }).blur(function(){
+    $(this).css("background-color","white");
+  });
+
+  $("#regForm").submit(function(e){
+    e.preventDefault();
+    let name=$("#name").val();
+    let email=$("#email").val();
+    let dept=$("#dept").val();
+    let event=$("#event").val();
+    let comments=$("#comments").val();
+
+    if(name=="" || email==""){
+      alert("Please fill all required fields");
+      return;
+    }
+
+    $("#output").html(
+      "<b>Name:</b> "+name+"<br>"+
+      "<b>Email:</b> "+email+"<br>"+
+      "<b>Department:</b> "+dept+"<br>"+
+      "<b>Event:</b> "+event+"<br>"+
+      "<b>Comments:</b> "+comments
+    );
+    $("#preview").show();
+  });
+});
+</script>
+
+</body>
+</html>
+
+Explanation:
+
+Used HTML5 forms with `input`, `datalist`, `select`, and `textarea`.
+CSS3 gives rounded corners and responsive layout.
+Bootstrap makes the page look neat and mobile-friendly.
+jQuery is used for form validation and to show data preview before submitting.
