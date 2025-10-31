@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: Arial;
+    }
+    .container {
+      margin-top: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0px 0px 8px gray;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 0 5px lightgray;
+    }
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: white;
+    }
+    .dark-mode .card {
+      background-color: #333;
+      color: white;
+    }
+    @media (max-width:600px){
+      .container{
+        width:95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h3 class="text-center text-primary mb-3">Employee Performance Dashboard</h3>
+
+  <div class="d-flex justify-content-between mb-3">
+    <select id="dept" class="form-select w-25">
+      <option value="All">All Departments</option>
+      <option value="Sales">Sales</option>
+      <option value="Engineering">Engineering</option>
+      <option value="HR">HR</option>
+    </select>
+    <button id="themeBtn" class="btn btn-dark">Switch Theme</button>
+  </div>
+
+  <div id="dashboard" class="row g-3">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Asha - Engineering</h5>
+        <p>Performance: 85%</p>
+        <div class="progress">
+          <div class="progress-bar" style="width:85%">85%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Ravi - Sales</h5>
+        <p>Performance: 75%</p>
+        <div class="progress">
+          <div class="progress-bar bg-success" style="width:75%">75%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Meena - HR</h5>
+        <p>Performance: 90%</p>
+        <div class="progress">
+          <div class="progress-bar bg-info" style="width:90%">90%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#themeBtn").click(function(){
+    $("body").toggleClass("dark-mode");
+  });
+
+  $("#dept").change(function(){
+    let dept = $(this).val();
+    $(".card").parent().show();
+    if(dept !== "All"){
+      $(".card").each(function(){
+        if(!$(this).text().includes(dept)){
+          $(this).parent().hide();
+        }
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
+Explanation:
+
+HTML5: Used `<div>`, `<select>`, and `<button>` to structure the dashboard layout properly.
+CSS3: Used box model, rounded corners, and a media query for mobile view.
+Bootstrap: Used grid system (`row`, `col-md-4`) and progress bars for showing performance visually.
+JavaScript & jQuery:
+
+   Theme switching (light/dark) done by toggling a CSS class.
+   Filter option dynamically hides or shows cards based on department.
+   Smooth UI interaction with jQuery `.toggleClass()` and `.change()`.
